@@ -87,7 +87,18 @@ def extract_shorelines(metadata, settings):
 
     sitename = settings['inputs']['sitename']
     filepath_data = settings['inputs']['filepath']
-    filepath_models = os.path.join(os.getcwd(), 'classification', 'models')
+
+    # filepath_models = os.path.join(os.getcwd(), 'classification', 'models')
+    # # update classification model file path to match root directory for coastsat
+    # # instead of cwd    
+    from pathlib import Path
+    
+    # CoastSat repository root
+    coastsat_root = Path(__file__).resolve().parent.parent
+    
+    # Classification models
+    filepath_models = str(coastsat_root / "classification" / "models")
+
     # initialise output structure
     output = dict([])
     # create a subfolder to store the .jpg images showing the detection
