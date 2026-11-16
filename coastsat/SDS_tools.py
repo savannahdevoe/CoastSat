@@ -753,8 +753,10 @@ def transects_from_geojson(filename):
         contains the X and Y coordinates of each transect
         
     """  
-    
-    gdf = gpd.read_file(filename,driver='GeoJSON')
+    # SRD comment out driver='GeoJSON', after getting error: 
+        # Lib\site-packages\pyogrio\raw.py:200: RuntimeWarning: driver
+        # GeoJSON does not support open option DRIVER
+    gdf = gpd.read_file(filename)#,driver='GeoJSON')
     transects = dict([])
     for i in gdf.index:
         transects[gdf.loc[i,'name']] = np.array(gdf.loc[i,'geometry'].coords)
